@@ -26,5 +26,12 @@ namespace ZachPhysics
             particle.Force = this.Force;
             particle.Mass = this.Mass;
         }
+
+        public void CalculateAngle(Vector2 vel, float angle, float initHeight)
+        {
+            var time = 2 * vel.y / 9.81f;
+            var range = vel.x * time;
+            var maxHeight = 0;
+        }
     }
 }
