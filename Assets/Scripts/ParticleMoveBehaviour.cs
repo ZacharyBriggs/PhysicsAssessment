@@ -10,6 +10,9 @@ namespace ZachPhysics
         public MovementObject moveType;
         public Vector3 Force = new Vector3(0,0,0);
         public float Mass = 0;
+        public float velocity;
+        public float angle;
+        public float initHeight;
         // Use this for initialization
         void Start()
         {
@@ -25,13 +28,22 @@ namespace ZachPhysics
             particle.Position = this.transform.position;
             particle.Force = this.Force;
             particle.Mass = this.Mass;
+            if(Input.GetKeyDown(KeyCode.A))
+            {
+                CalculateAngle(velocity,angle,initHeight);
+            }
         }
 
-        public void CalculateAngle(Vector2 vel, float angle, float initHeight)
+        public static void CalculateAngle(float vel, float angle, float initHeight)
         {
-            var time = 2 * vel.y / 9.81f;
-            var range = vel.x * time;
-            var maxHeight = 0;
+            var vx = vel * Mathf.Cos(angle);
+            var vy = vel * Mathf.Sin(angle);
+            var flightTime = (2 * vy) / -9.81;
+            Debug.Log(flightTime);
+            var range = (2 * vx * vy) / -9.81;
+            Debug.Log(range);
+            var maxHeight = (vy * vy) / (2 * -9.81);
+            Debug.Log(maxHeight);
         }
     }
 }

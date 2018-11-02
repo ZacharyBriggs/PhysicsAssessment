@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\CalculatorScriptable.cs" />
     <Compile Include="Assets\Scripts\IMoveable.cs" />
     <Compile Include="Assets\Scripts\LinearMove.cs" />
     <Compile Include="Assets\Scripts\Particle.cs" />

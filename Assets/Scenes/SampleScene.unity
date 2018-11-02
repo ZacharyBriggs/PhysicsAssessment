@@ -287,8 +287,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveType: {fileID: 11400000, guid: 6f6b1bb7c9b5a1843831124f201396a4, type: 2}
-  Force: {x: 0, y: 0, z: 0}
-  Mass: 0
+  Force: {x: 1, y: 0, z: 0}
+  Mass: 1
+  velocity: 1
+  angle: 1
+  initHeight: 1
 --- !u!135 &1634876405
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -350,7 +353,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634876403}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.6893697, y: 1.9697547, z: 0.44}
+  m_LocalPosition: {x: -2.4, y: 1.9697547, z: 0.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
