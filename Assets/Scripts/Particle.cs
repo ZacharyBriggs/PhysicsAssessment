@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace ZachPhysics
     {
+    [System.Serializable]
     public class Particle
     {
         public MovementObject Moveable;

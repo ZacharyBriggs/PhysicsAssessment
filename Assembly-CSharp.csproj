@@ -60,11 +60,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\BoidBehaviour.cs" />
+    <Compile Include="Assets\Scripts\BoidMoveBehaviour.cs" />
     <Compile Include="Assets\Scripts\CalculatorScriptable.cs" />
     <Compile Include="Assets\Scripts\CohesionMove.cs" />
     <Compile Include="Assets\Scripts\IMoveable.cs" />
     <Compile Include="Assets\Scripts\LinearMove.cs" />
     <Compile Include="Assets\Scripts\Particle.cs" />
+    <Compile Include="Assets\Scripts\ParticleDataScriptable.cs" />
     <Compile Include="Assets\Scripts\ParticleMoveBehaviour.cs" />
     <Compile Include="Assets\Scripts\WeirdMove.cs" />
     <None Include="Assets\Scenes\readme.txt" />

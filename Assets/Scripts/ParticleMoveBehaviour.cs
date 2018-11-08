@@ -28,11 +28,13 @@ namespace ZachPhysics
             particle.Position = this.transform.position;
             particle.Force = this.Force;
             particle.Mass = this.Mass;
-            if(Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.A))
             {
-                CalculateAngle(velocity,angle,initHeight);
+                CalculateAngle(velocity, angle, initHeight);
             }
         }
+
+        
 
         public static void CalculateAngle(float vel, float angle, float initHeight)
         {

@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CohesionMove : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+namespace ZachPhysics
+{
+    public class CohesionMove : MovementObject
+    {
+        public override Vector3 Move(Vector3 pos, Vector3 force, float mass)
+        {
+            return new Vector3(0, 0, 0);   
+        }
+    }
 }
