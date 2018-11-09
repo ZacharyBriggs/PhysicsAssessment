@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9fc01934b1b41a48887a9bf070cadbb, type: 3}
   m_Name: BoidOne
   m_EditorClassIdentifier: 
-  Position: {x: 1, y: 1, z: 0}
+  Position: {x: 8, y: 2, z: 2}
   Displacement: {x: 0, y: 0, z: 0}
   Velocity: {x: 0, y: 0, z: 0}
   Acceleration: {x: 0, y: 0, z: 0}

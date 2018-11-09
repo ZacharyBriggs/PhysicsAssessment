@@ -36,8 +36,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1416151669273040}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1, y: 1, z: 0.44}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5, y: 5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,6 +100,8 @@ MonoBehaviour:
     Moveable: {fileID: 0}
     Mass: 0
   particleData: {fileID: 11400000, guid: 66de64fb55d98624ab322c59a21906f3, type: 2}
+  perching: 0
+  perchTime: 1
 --- !u!135 &135373003273268088
 SphereCollider:
   m_ObjectHideFlags: 1
