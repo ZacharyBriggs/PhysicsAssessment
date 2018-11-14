@@ -60,16 +60,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BoidBehaviour.cs" />
-    <Compile Include="Assets\Scripts\BoidMoveBehaviour.cs" />
-    <Compile Include="Assets\Scripts\CalculatorScriptable.cs" />
-    <Compile Include="Assets\Scripts\CohesionMove.cs" />
-    <Compile Include="Assets\Scripts\IMoveable.cs" />
-    <Compile Include="Assets\Scripts\LinearMove.cs" />
-    <Compile Include="Assets\Scripts\Particle.cs" />
-    <Compile Include="Assets\Scripts\ParticleDataScriptable.cs" />
-    <Compile Include="Assets\Scripts\ParticleMoveBehaviour.cs" />
-    <Compile Include="Assets\Scripts\WeirdMove.cs" />
+    <Compile Include="Assets\Scripts\AABB\CollisionController2D.cs" />
+    <Compile Include="Assets\Scripts\AABB\CollisionVolume2D.cs" />
+    <Compile Include="Assets\Scripts\Boids\BoidBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Boids\BoidMoveBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Boids\CalculatorScriptable.cs" />
+    <Compile Include="Assets\Scripts\Boids\CohesionMove.cs" />
+    <Compile Include="Assets\Scripts\Boids\IMoveable.cs" />
+    <Compile Include="Assets\Scripts\Boids\LinearMove.cs" />
+    <Compile Include="Assets\Scripts\Boids\Particle.cs" />
+    <Compile Include="Assets\Scripts\Boids\ParticleDataScriptable.cs" />
+    <Compile Include="Assets\Scripts\Boids\ParticleMoveBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Boids\WeirdMove.cs" />
     <None Include="Assets\Scenes\readme.txt" />
     <None Include="Assets\Audio\readme.txt" />
     <None Include="Assets\Resources\readme.txt" />

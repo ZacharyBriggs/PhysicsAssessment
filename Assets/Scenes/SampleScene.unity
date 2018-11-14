@@ -478,7 +478,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: Add 100 Boids
 --- !u!222 &1113220017
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -519,6 +519,9 @@ MonoBehaviour:
   aFac: 1
   vLim: 10
   lFac: 1
+  ruleOneMagicNum: 0
+  MinDistBetweenBoids: 0
+  RuleThreeMagicNum: 0
   XMin: 0
   XMax: 30
   YMin: 0
