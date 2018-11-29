@@ -7,7 +7,6 @@ namespace ZachPhysics
     [System.Serializable]
     public class Particle
     {
-        public bool IsAnchored;
         public MovementObject Moveable;
         public Vector3 Position { get; set; }
         public Vector3 Displacement { get; set; }
@@ -15,5 +14,17 @@ namespace ZachPhysics
         public Vector3 Acceleration { get; set; }
         public Vector3 Force { get; set; }
         public float Mass;
+        public void AddForce(Vector3 force)
+        {
+            Force += force;
+        }
+
+        public void Update(float dt)
+        {            
+            Acceleration = Force * Mass;
+            Velocity = Velocity + Acceleration * dt;
+            Position = Position + Velocity * dt;
+            Force = Vector3.zero;
+        }
     }
 }

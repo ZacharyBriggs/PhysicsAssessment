@@ -71,7 +71,8 @@
     <Compile Include="Assets\Scripts\Boids\ParticleMoveBehaviour.cs" />
     <Compile Include="Assets\Scripts\Boids\WeirdMove.cs" />
     <Compile Include="Assets\Scripts\Cloth\ClothBehaviour.cs" />
-    <Compile Include="Assets\Scripts\Cloth\SpringDamper.cs" />
+    <Compile Include="Assets\Scripts\Cloth\ClothParticle.cs" />
+    <Compile Include="Assets\Scripts\Cloth\SpringDamperBehaviour.cs" />
     <Compile Include="Assets\Scripts\Particle.cs" />
     <Compile Include="Assets\Scripts\ParticleDataScriptable.cs" />
     <None Include="Assets\Scenes\readme.txt" />
