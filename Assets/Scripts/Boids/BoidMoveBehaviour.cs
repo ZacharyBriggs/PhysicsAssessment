@@ -86,7 +86,7 @@ namespace ZachPhysics
                     if (boid.boidData != currentBoid)
                         pc += boid.boidData.Position;
                 }
-                pc = pc / (numBoids - 1);
+                pc = pc / (numBoids - 1);                
                 return (pc - currentBoid.Position) / ruleOneMagicNum;
             }
 

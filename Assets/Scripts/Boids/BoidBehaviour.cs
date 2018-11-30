@@ -22,7 +22,7 @@ namespace ZachPhysics
                 particleData.Position = pos;
                 boidData.Position = particleData.Position;
                 boidData.Displacement = particleData.Displacement;
-                boidData.Velocity = particleData.Velocity;
+                boidData.Velocity = new Vector3(x,y,z).normalized;
                 boidData.Acceleration = particleData.Acceleration;
                 boidData.Force = particleData.Force;
                 boidData.Mass = particleData.Mass;

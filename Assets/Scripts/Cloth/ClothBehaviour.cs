@@ -156,7 +156,7 @@ public class ClothBehaviour : MonoBehaviour
             {
                 var damper = CreateDamper(allParticles[i], allParticles[i + width + 1]);
                 var component = damper.GetComponent<SpringDamperBehaviour>();
-                allDampers.Add(component);
+                allDampers.Add(component);  
 
                 var damper2 = CreateDamper(allParticles[i], allParticles[i + width - 1]);
                 var component2 = damper2.GetComponent<SpringDamperBehaviour>();

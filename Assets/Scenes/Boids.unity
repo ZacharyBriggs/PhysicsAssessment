@@ -519,9 +519,9 @@ MonoBehaviour:
   aFac: 1
   vLim: 10
   lFac: 1
-  ruleOneMagicNum: 0
-  MinDistBetweenBoids: 0
-  RuleThreeMagicNum: 0
+  ruleOneMagicNum: 1
+  MinDistBetweenBoids: 1
+  RuleThreeMagicNum: 1
   XMin: 0
   XMax: 30
   YMin: 0
