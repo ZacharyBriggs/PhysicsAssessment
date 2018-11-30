@@ -10,7 +10,7 @@ namespace ZachPhysics
         public class ClothParticle : MonoBehaviour
         {
             public bool Anchored;
-            private Particle _particle = new Particle();
+            public Particle _particle = new Particle();
             public Vector3 Force;
             public Vector3 Velocity;
             public float Mass = 1;

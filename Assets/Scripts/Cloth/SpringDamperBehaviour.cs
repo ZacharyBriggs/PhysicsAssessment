@@ -7,8 +7,10 @@ public class SpringDamperBehaviour : MonoBehaviour
 {
     public ClothParticle Particle1; //p1/f1
     public ClothParticle Particle2; //p1/f1
-    public float SpringConstant; //ks
-    public float DampingFactor; //kd
+    public Vector3 p1pos;
+    public Vector3 p2pos;
+    public float SpringConstant = 50; //ks
+    public float DampingFactor = 2; //kd
     public float RestLength; //lo
     private float Length; //l
     private Vector3 UnitLength; //e
@@ -25,6 +27,9 @@ public class SpringDamperBehaviour : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        p1pos = Particle1.transform.position;
+        p2pos = Particle2.transform.position;
+
         CalculateUnitLength();
         CalculateVelocityPrime();
         ConvertDimensions();
