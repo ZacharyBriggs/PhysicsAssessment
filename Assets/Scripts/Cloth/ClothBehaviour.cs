@@ -137,7 +137,6 @@ public class ClothBehaviour : MonoBehaviour
             }
         }
 
-        var thing = 1;
         for (int i = 0; i < allParticles.Count; i++)
         {
             if (i % width == 0)
