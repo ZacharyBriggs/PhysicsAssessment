@@ -4,33 +4,32 @@ using UnityEngine;
 using ZachPhysics.ZachCloth;
 public class AerodynamicForce
 {
-    private Vector3 Density;
+    private Vector3 Density = new Vector3(0,0,2);
     private float DragCoefficient;
     private float Area;
     private Vector3 OppositeVector;
-    private ClothParticle Particle1;
-    private ClothParticle Particle2;
-    private ClothParticle Particle3;
+    private ClothTriangle Triangle;
 
-    public AerodynamicForce(ClothParticle p1, ClothParticle p2, ClothParticle p3, float drag)
+    public AerodynamicForce(ClothParticle p1, int p1index, ClothParticle p2, int p2index, ClothParticle p3, int p3index, float drag)
     {
-        Particle1 = p1;
-        Particle2 = p2;
-        Particle3 = p3;
+        Triangle = new ClothTriangle(p1,p1index,p2,p2index,p3,p3index);
         DragCoefficient = drag;
     }
-    // Use this for initialization
-    private void function()
+    
+    public void AddAerodynamicForce()
     {
-        var vSurface = (Particle1.Velocity + Particle2.Velocity + Particle3.Velocity) / 3;
+        var vSurface = (Triangle.Particle1.Velocity + Triangle.Particle2.Velocity + Triangle.Particle3.Velocity) / 3;
         var vel = vSurface - Density;
-        var diff2And1 = Particle2._particle.Position - Particle1._particle.Position;
-        var diff3and1 = Particle3._particle.Position - Particle1._particle.Position;
+        var diff2And1 = Triangle.Particle2.Position - Triangle.Particle1.Position;
+        var diff3and1 = Triangle.Particle3.Position - Triangle.Particle1.Position;
         var cross = Vector3.Cross(diff2And1, diff3and1);
         var normal = cross / cross.magnitude;
-        var areaO = cross.magnitude / 2;
+        var areaO = 0.5f * cross.magnitude ;
         Area = areaO + (Vector3.Dot(vel, normal) / vel.magnitude);
-        var normalPrime = Vector3.Cross(diff2And1,diff3and1);
-        var thing = ((vel.magnitude * Vector3.Dot(vel, normal)) / (2*normalPrime.magnitude))*normalPrime;
+        var normalPrime = cross;
+        var totalForce = -.5f * ((vel.magnitude * Vector3.Dot(vel, normalPrime)) / (2*normalPrime.magnitude))*normalPrime.normalized;
+        Triangle.Particle1.AddForce(totalForce / 3);
+        Triangle.Particle2.AddForce(totalForce / 3);
+        Triangle.Particle3.AddForce(totalForce / 3);
     }
 }

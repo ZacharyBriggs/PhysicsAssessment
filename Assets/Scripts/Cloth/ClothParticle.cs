@@ -7,17 +7,19 @@ namespace ZachPhysics
 {
     namespace ZachCloth
     {
-        public class ClothParticle : MonoBehaviour
+        public class ClothParticle  
         {
             public bool Anchored;
-            public Particle _particle = new Particle();
+            private Particle _particle = new Particle();
+            public Vector3 Position;
             public Vector3 Force;
             public Vector3 Velocity;
             public float Mass = 1;
-            // Use this for initialization
-            void Awake()
+            
+            public ClothParticle(Vector3 pos)
             {
-                _particle.Position = transform.position;
+                Position = pos;
+                _particle.Position = pos;
                 _particle.Force = Force;
                 _particle.Velocity = Velocity;
                 _particle.Mass = Mass;
@@ -29,13 +31,13 @@ namespace ZachPhysics
             }
 
             // Update is called once per frame
-            void Update()
+            public void Update()
             {
                 if (!Anchored)
                 {
                     Force = _particle.Force;
                     Velocity = _particle.Velocity;
-                    this.transform.position = _particle.Position;                    
+                    Position = _particle.Position;                    
                     _particle.AddForce(new Vector3(0, -9.81f, 0) * .25f);
                     _particle.Update(Time.deltaTime);                    
                 }
