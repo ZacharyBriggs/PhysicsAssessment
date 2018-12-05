@@ -10,6 +10,7 @@ namespace ZachPhysics
         public class ClothParticle  
         {
             public bool Anchored;
+            public bool Active = false;
             private Particle _particle = new Particle();
             public Vector3 Position;
             public Vector3 Force;
@@ -31,15 +32,14 @@ namespace ZachPhysics
             }
 
             // Update is called once per frame
-            public void Update()
+            public void Update(float dt)
             {
                 if (!Anchored)
                 {
                     Force = _particle.Force;
                     Velocity = _particle.Velocity;
                     Position = _particle.Position;                    
-                    _particle.AddForce(new Vector3(0, -9.81f, 0) * .25f);
-                    _particle.Update(Time.deltaTime);                    
+                    _particle.Update(dt);                    
                 }
             }
         }

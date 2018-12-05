@@ -8,20 +8,24 @@ public class ClothBehaviour : MonoBehaviour
     public int width;
     public int height;
     public float dist;
-    public float AirForce;
+    public float SpringConstant;
+    public float DampingFactor;
+    public float GravityScale;
+    public Vector3 AirDensity;
+    public float Drag;
+    ClothParticle heldParticle;
     private List<ClothParticle> allParticles = new List<ClothParticle>();
     private List<SpringDamper> allDampers = new List<SpringDamper>();
     private List<SpringDamper> bendingSprings = new List<SpringDamper>();
-    private List<AerodynamicForce> allTriangles = new List<AerodynamicForce>();
+    List<AerodynamicForce> allTriangles = new List<AerodynamicForce>();
 
     void Start()
     {
-
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                var particle = CreateParticle(x + dist, y ,false);
+                var particle = CreateParticle(x + dist, y, false);
                 if (y == height - 1)
                     particle.Anchored = true;
 
@@ -43,12 +47,12 @@ public class ClothBehaviour : MonoBehaviour
         }
 
         var crossdampers = ((width - 1) * height) - (width - 1);
-        for (int i = 0; i < crossdampers; i++)
+        for (int i = 0; i < crossdampers + width - 1; i++)
         {
-            if (i % width == width - 1)
+            if (i % width != width - 1)
             {
-                var triangle = new AerodynamicForce(allParticles[i], i, allParticles[i + 1], i + 1, allParticles[i + width], i + width, AirForce);
-                var triangle2 = new AerodynamicForce(allParticles[i + 1], i + 1, allParticles[i], i, allParticles[i + 1 + width], i + 1 + width, AirForce);
+                var triangle = new AerodynamicForce(allParticles[i], i, allParticles[i + 1], i + 1, allParticles[i + width], i + width);
+                var triangle2 = new AerodynamicForce(allParticles[i + 1], i + 1, allParticles[i + width + 1], i + width + 1, allParticles[i + width], i + width);
                 allTriangles.Add(triangle);
                 allTriangles.Add(triangle2);
             }
@@ -79,7 +83,7 @@ public class ClothBehaviour : MonoBehaviour
             }
         }
 
-        for(int i = 0; i<allParticles.Count;i++)
+        for (int i = 0; i < allParticles.Count; i++)
         {
             if (i == width - 1 || i == width - 2)
             {
@@ -87,23 +91,84 @@ public class ClothBehaviour : MonoBehaviour
                 bendingSprings.Add(damper);
             }
         }
-	}
+    }
+
+    
 	
 	void Update ()
     {
-        foreach(var particle in allParticles)
-            particle.Update();
-
         foreach(var spring in allDampers)
-            spring.Update();
+            spring.Update(SpringConstant, DampingFactor);
 
         foreach(var spring in bendingSprings)
-            spring.Update();
+            spring.Update(SpringConstant, DampingFactor);
 
-        foreach(var force in allTriangles)
-            force.AddAerodynamicForce();
+            var mousePos = Input.mousePosition;
+            var worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x,
+                mousePos.y,
+                -Camera.main.transform.position.z));
+            
+
+            if (Input.GetMouseButtonDown(0))
+                foreach (var p in allParticles)
+                {
+                    var scaledPPositoin = new Vector3(p.Position.x * transform.localScale.x,
+                        p.Position.y * transform.localScale.y,
+                        p.Position.z * transform.localScale.z);
+                    var checkPos = new Vector3(worldMousePos.x, worldMousePos.y, p.Position.z);
+                    if (Vector3.Distance(checkPos, scaledPPositoin) <= 1f)
+                        heldParticle = p;
+                }
+
+            if (Input.GetMouseButton(0) && heldParticle != null)
+            {
+                heldParticle.Position = worldMousePos;
+                if (Input.GetKeyDown(KeyCode.R))
+                {
+                    heldParticle.Active = false;
+                    for (var i = 0; i < allDampers.Count; i++)
+                        if (allDampers[i].Particle1 == heldParticle || allDampers[i].Particle2 == heldParticle)
+                            allDampers.RemoveAt(i);
+                    for (var i = 0; i < allTriangles.Count; i++)
+                        if (allTriangles[i].Triangle.Particle1 == heldParticle || allTriangles[i].Triangle.Particle2 == heldParticle || allTriangles[i].Triangle.Particle3 == heldParticle)
+                            allTriangles.RemoveAt(i);
+                }
+
+                if (Input.GetKeyDown(KeyCode.A))
+                    heldParticle.Anchored = !heldParticle.Anchored;
+            }
+
+            if (Input.GetMouseButtonUp(0))
+                heldParticle = null;
     }
-    
+
+    private void LateUpdate()
+    {
+        var gravity = -9.81f;
+        foreach (var p in allParticles)
+            p.AddForce(new Vector3(0,gravity*GravityScale,0));
+
+        foreach (var sd in allDampers)
+            sd.Update(SpringConstant,DampingFactor);
+
+        foreach (var tri in allTriangles)
+        {
+            tri.Density = AirDensity;
+            tri.DragCoefficient = Drag;
+            tri.AddAerodynamicForce(AirDensity);
+        }
+
+        foreach (var p in allParticles)
+        {
+            p.Update(Time.deltaTime);
+        }
+
+        for (int i = 0; i < allParticles.Count; i++)
+        {
+            //Spheres[i].transform.position = Particles[i].Position;
+        }
+    }
+
     ClothParticle CreateParticle(float x, float y, bool IsAnchored)
     {
         ClothParticle cp = new ClothParticle(new Vector3(x,y,0));

@@ -4,20 +4,20 @@ using UnityEngine;
 using ZachPhysics.ZachCloth;
 public class AerodynamicForce
 {
-    private Vector3 Density = new Vector3(0,0,2);
-    private float DragCoefficient;
+    public Vector3 Density;
+    public float DragCoefficient;
     private float Area;
     private Vector3 OppositeVector;
-    private ClothTriangle Triangle;
+    public ClothTriangle Triangle;
 
-    public AerodynamicForce(ClothParticle p1, int p1index, ClothParticle p2, int p2index, ClothParticle p3, int p3index, float drag)
+    public AerodynamicForce(ClothParticle p1, int p1index, ClothParticle p2, int p2index, ClothParticle p3, int p3index)
     {
         Triangle = new ClothTriangle(p1,p1index,p2,p2index,p3,p3index);
-        DragCoefficient = drag;
     }
     
-    public void AddAerodynamicForce()
+    public void AddAerodynamicForce(Vector3 density)
     {
+        Density = density;
         var vSurface = (Triangle.Particle1.Velocity + Triangle.Particle2.Velocity + Triangle.Particle3.Velocity) / 3;
         var vel = vSurface - Density;
         var diff2And1 = Triangle.Particle2.Position - Triangle.Particle1.Position;

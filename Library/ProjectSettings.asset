@@ -647,7 +647,7 @@ PlayerSettings:
   cloudServicesEnabled:
     UNet: 1
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: be4cbc97-9eef-4c6c-88b6-0992073332cc
   projectName: PhysicsAssessment
   organizationId: zacharybriggs64

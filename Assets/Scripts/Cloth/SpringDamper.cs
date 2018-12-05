@@ -27,11 +27,12 @@ public class SpringDamper
 	}
 	
 	// Update is called once per frame
-	public void Update ()
+	public void Update (float ks, float kd)
     {
         p1pos = Particle1.Position;
         p2pos = Particle2.Position;
-
+        SpringConstant = ks;
+        DampingFactor = kd;
         CalculateUnitLength();
         CalculateVelocityPrime();
         ConvertDimensions();
