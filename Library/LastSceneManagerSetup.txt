@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Cloth.unity
+- path: Assets/Scenes/AABB.unity
   isLoaded: 1
   isActive: 1

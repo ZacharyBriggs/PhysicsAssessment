@@ -10,8 +10,7 @@ namespace ZachPhysics
         public class ClothParticle  
         {
             public bool Anchored;
-            public bool Active = false;
-            private Particle _particle = new Particle();
+            public Particle _particle = new Particle();
             public Vector3 Position;
             public Vector3 Force;
             public Vector3 Velocity;
@@ -36,11 +35,12 @@ namespace ZachPhysics
             {
                 if (!Anchored)
                 {
-                    Force = _particle.Force;
+                    Force = _particle.Force;           
+                    _particle.Update(dt);
                     Velocity = _particle.Velocity;
-                    Position = _particle.Position;                    
-                    _particle.Update(dt);                    
+                    Position = _particle.Position;
                 }
+                _particle.Force = Vector3.zero;
             }
         }
     }

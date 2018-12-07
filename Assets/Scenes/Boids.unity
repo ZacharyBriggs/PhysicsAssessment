@@ -517,18 +517,18 @@ MonoBehaviour:
   cFac: 1
   dFac: 1.29
   aFac: 1
-  vLim: 10
+  vLim: 1
   lFac: 1
   ruleOneMagicNum: 1
   MinDistBetweenBoids: 1
   RuleThreeMagicNum: 1
   XMin: 0
   XMax: 30
-  YMin: 0
+  YMin: -10
   YMax: 30
   ZMin: 0
   ZMax: 30
-  GroundLevel: 0
+  GroundLevel: 1
 --- !u!4 &1186944915
 Transform:
   m_ObjectHideFlags: 0

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZachPhysics.ZachCloth;
+using ZachPhysics;
 
 public class ClothBehaviour : MonoBehaviour
 {
@@ -13,8 +13,8 @@ public class ClothBehaviour : MonoBehaviour
     public float GravityScale;
     public Vector3 AirDensity;
     public float Drag;
-    ClothParticle heldParticle;
-    private List<ClothParticle> allParticles = new List<ClothParticle>();
+    Particle heldParticle;
+    private List<Particle> allParticles = new List<Particle>();
     private List<SpringDamper> allDampers = new List<SpringDamper>();
     private List<SpringDamper> bendingSprings = new List<SpringDamper>();
     List<AerodynamicForce> allTriangles = new List<AerodynamicForce>();
@@ -104,27 +104,22 @@ public class ClothBehaviour : MonoBehaviour
             spring.Update(SpringConstant, DampingFactor);
 
             var mousePos = Input.mousePosition;
-            var worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x,
-                mousePos.y,
-                -Camera.main.transform.position.z));
-            
+            var worldMousePos = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, -Camera.main.transform.position.z));
 
             if (Input.GetMouseButtonDown(0))
                 foreach (var p in allParticles)
-                {
-                    var scaledPPositoin = new Vector3(p.Position.x * transform.localScale.x,
-                        p.Position.y * transform.localScale.y,
-                        p.Position.z * transform.localScale.z);
+                {       
                     var checkPos = new Vector3(worldMousePos.x, worldMousePos.y, p.Position.z);
-                    if (Vector3.Distance(checkPos, scaledPPositoin) <= 1f)
+                    if (Vector3.Distance(checkPos, p.Position) <= 1f)
                         heldParticle = p;
                 }
 
             if (Input.GetMouseButton(0) && heldParticle != null)
             {
                 heldParticle.Position = worldMousePos;
-                if (Input.GetKeyDown(KeyCode.R))
+                if (heldParticle.Force.magnitude > 60|| Input.GetKeyDown(KeyCode.R))
                 {
+                    heldParticle.Force = Vector3.zero;
                     heldParticle.Active = false;
                     for (var i = 0; i < allDampers.Count; i++)
                         if (allDampers[i].Particle1 == heldParticle || allDampers[i].Particle2 == heldParticle)
@@ -146,7 +141,7 @@ public class ClothBehaviour : MonoBehaviour
     {
         var gravity = -9.81f;
         foreach (var p in allParticles)
-            p.AddForce(new Vector3(0,gravity*GravityScale,0));
+            p.AddForce(new Vector3(0, gravity*GravityScale, 0));
 
         foreach (var sd in allDampers)
             sd.Update(SpringConstant,DampingFactor);
@@ -169,14 +164,14 @@ public class ClothBehaviour : MonoBehaviour
         }
     }
 
-    ClothParticle CreateParticle(float x, float y, bool IsAnchored)
+    Particle CreateParticle(float x, float y, bool IsAnchored)
     {
-        ClothParticle cp = new ClothParticle(new Vector3(x,y,0));
+        Particle cp = new Particle(new Vector3(x,y,0));
         cp.Anchored = IsAnchored;
         return cp;
     }
     
-    SpringDamper CreateDamper(ClothParticle particle1, ClothParticle particle2)
+    SpringDamper CreateDamper(Particle particle1, Particle particle2)
     {
         SpringDamper sd = new SpringDamper(particle1,particle2);
         return sd;

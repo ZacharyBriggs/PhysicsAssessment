@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZachPhysics.ZachCloth;
+using ZachPhysics;
 
 public class SpringDamper
 {
-    public ClothParticle Particle1; //p1/f1
-    public ClothParticle Particle2; //p1/f1
+    public Particle Particle1; //p1/f1
+    public Particle Particle2; //p1/f1
     public Vector3 p1pos;
     public Vector3 p2pos;
     public float SpringConstant = 50; //ks
@@ -19,7 +19,7 @@ public class SpringDamper
     private Vector3 Force1;
     private Vector3 Force2;
     // Use this for initialization
-    public SpringDamper(ClothParticle p1, ClothParticle p2)
+    public SpringDamper(Particle p1, Particle p2)
     {
         Particle1 = p1;
         Particle2 = p2;

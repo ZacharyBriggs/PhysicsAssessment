@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ZachPhysics.ZachCloth;
+using ZachPhysics;
 public class AerodynamicForce
 {
     public Vector3 Density;
@@ -10,7 +10,7 @@ public class AerodynamicForce
     private Vector3 OppositeVector;
     public ClothTriangle Triangle;
 
-    public AerodynamicForce(ClothParticle p1, int p1index, ClothParticle p2, int p2index, ClothParticle p3, int p3index)
+    public AerodynamicForce(Particle p1, int p1index, Particle p2, int p2index, Particle p3, int p3index)
     {
         Triangle = new ClothTriangle(p1,p1index,p2,p2index,p3,p3index);
     }

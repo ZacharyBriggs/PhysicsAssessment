@@ -68,7 +68,7 @@ namespace ZachPhysics
                         if (Boid.boidData.Position.y < GroundLevel)
                         {
                             Boid.boidData.Position = new Vector3(Boid.boidData.Position.x, GroundLevel, Boid.boidData.Position.z);
-                            Boid.perching = true;
+                            //Boid.perching = true;
                         }
                         if (Boid.boidData.Velocity.magnitude > vLim)
                             Boid.boidData.Velocity = (Boid.boidData.Velocity / Boid.boidData.Velocity.magnitude) * vLim;
