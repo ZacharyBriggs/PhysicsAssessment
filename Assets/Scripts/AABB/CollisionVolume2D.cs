@@ -13,11 +13,23 @@ namespace ZachPhysics
             public float maxX;
             public float minY;
             public float maxY;
-            
+            public bool collider2;
             public bool isColliding;
 
             private void Update()
             {
+                if (!collider2)
+                {
+                    var h = Input.GetAxis("Horizontal");
+                    var v = Input.GetAxis("Vertical");
+                    transform.position += new Vector3(h, v, 0);
+                }
+                else
+                {
+                    var h = Input.GetAxis("HorizontalTwo");
+                    var v = Input.GetAxis("VerticalTwo");
+                    transform.position += new Vector3(h, v, 0);
+                }
                 minX = this.transform.position.x - Size;
                 maxX = this.transform.position.x + Size;
                 minY = this.transform.position.y - Size;

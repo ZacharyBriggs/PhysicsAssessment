@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if Unity_Editor
 using UnityEditor;
+#endif
 
 [CreateAssetMenu]
 public class CalculatorScriptable : ScriptableObject
@@ -26,7 +28,7 @@ public class CalculatorScriptable : ScriptableObject
         var vy = vel * Mathf.Sin(angle);
         return (vy * vy) / (2.0f * 9.81f);
     }
-
+#if Unity_Editor
     [CustomEditor(typeof(CalculatorScriptable))]
     public class CalculatorScriptableEditor : Editor
     {
@@ -51,4 +53,5 @@ public class CalculatorScriptable : ScriptableObject
             GUILayout.Box("Max Height: " + maxHeight.ToString());
         }
     }
+#endif
 }

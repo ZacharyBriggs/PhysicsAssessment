@@ -27,7 +27,8 @@ public class AerodynamicForce
         var areaO = 0.5f * cross.magnitude ;
         Area = areaO + (Vector3.Dot(vel, normal) / vel.magnitude);
         var normalPrime = cross;
-        var totalForce = -.5f * ((vel.magnitude * Vector3.Dot(vel, normalPrime)) / (2*normalPrime.magnitude))*normalPrime.normalized;
+        var totalForce = -.5f * ((vel.magnitude * Vector3.Dot(vel, normalPrime)) 
+            / (2*normalPrime.magnitude))*normalPrime.normalized;
         Triangle.Particle1.AddForce(totalForce / 3);
         Triangle.Particle2.AddForce(totalForce / 3);
         Triangle.Particle3.AddForce(totalForce / 3);

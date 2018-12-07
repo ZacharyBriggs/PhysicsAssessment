@@ -18,6 +18,8 @@ public class ClothBehaviour : MonoBehaviour
     private List<SpringDamper> allDampers = new List<SpringDamper>();
     private List<SpringDamper> bendingSprings = new List<SpringDamper>();
     List<AerodynamicForce> allTriangles = new List<AerodynamicForce>();
+    public List<LineRenderer> lines = new List<LineRenderer>();
+    public LineRenderer LinePrefab;
 
     void Start()
     {
@@ -37,11 +39,15 @@ public class ClothBehaviour : MonoBehaviour
             if (i % width != width - 1)
             {
                 var damper = CreateDamper(allParticles[i], allParticles[i + 1]);
+                var linerenderer = Instantiate(LinePrefab);
+                lines.Add(linerenderer);
                 allDampers.Add(damper);
             }
             if (i < allParticles.Count - height)
             {
                 var damper = CreateDamper(allParticles[i], allParticles[i + (int)width]);
+                var linerenderer = Instantiate(LinePrefab);
+                lines.Add(linerenderer);
                 allDampers.Add(damper);
             }
         }
@@ -65,19 +71,27 @@ public class ClothBehaviour : MonoBehaviour
                 if (i % width == 0)
                 {
                     var damper = CreateDamper(allParticles[i], allParticles[i + width + 1]);
+                    var linerenderer = Instantiate(LinePrefab);
+                    lines.Add(linerenderer);
                     allDampers.Add(damper);
                 }
                 else if (i % width == width - 1)
                 {
                     var damper = CreateDamper(allParticles[i], allParticles[i + width - 1]);
+                    var linerenderer = Instantiate(LinePrefab);
+                    lines.Add(linerenderer);
                     allDampers.Add(damper);
                 }
                 else
                 {
                     var damper = CreateDamper(allParticles[i], allParticles[i + width + 1]);
+                    var linerenderer = Instantiate(LinePrefab);
+                    lines.Add(linerenderer);
                     allDampers.Add(damper);
 
                     var damper2 = CreateDamper(allParticles[i], allParticles[i + width - 1]);
+                    linerenderer = Instantiate(LinePrefab);
+                    lines.Add(linerenderer);
                     allDampers.Add(damper2);
                 }
             }
@@ -125,7 +139,9 @@ public class ClothBehaviour : MonoBehaviour
                         if (allDampers[i].Particle1 == heldParticle || allDampers[i].Particle2 == heldParticle)
                             allDampers.RemoveAt(i);
                     for (var i = 0; i < allTriangles.Count; i++)
-                        if (allTriangles[i].Triangle.Particle1 == heldParticle || allTriangles[i].Triangle.Particle2 == heldParticle || allTriangles[i].Triangle.Particle3 == heldParticle)
+                        if (allTriangles[i].Triangle.Particle1 == heldParticle 
+                        || allTriangles[i].Triangle.Particle2 == heldParticle 
+                        || allTriangles[i].Triangle.Particle3 == heldParticle)
                             allTriangles.RemoveAt(i);
                 }
 
@@ -144,7 +160,11 @@ public class ClothBehaviour : MonoBehaviour
             p.AddForce(new Vector3(0, gravity*GravityScale, 0));
 
         foreach (var sd in allDampers)
-            sd.Update(SpringConstant,DampingFactor);
+        {
+            sd.Update(SpringConstant, DampingFactor);
+            lines[allDampers.IndexOf(sd)].SetPosition(0, sd.Particle1.Position);
+            lines[allDampers.IndexOf(sd)].SetPosition(1, sd.Particle2.Position);
+        }
 
         foreach (var tri in allTriangles)
         {

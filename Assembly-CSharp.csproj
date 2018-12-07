@@ -64,6 +64,7 @@
     <Compile Include="Assets\Scripts\AABB\CollisionVolume2D.cs" />
     <Compile Include="Assets\Scripts\Boids\BoidBehaviour.cs" />
     <Compile Include="Assets\Scripts\Boids\BoidMoveBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Boids\BoidsSliderController.cs" />
     <Compile Include="Assets\Scripts\Boids\CalculatorScriptable.cs" />
     <Compile Include="Assets\Scripts\Boids\CohesionMove.cs" />
     <Compile Include="Assets\Scripts\Boids\IMoveable.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Assets\Scripts\Cloth\SpringDamper.cs" />
     <Compile Include="Assets\Scripts\Particle.cs" />
     <Compile Include="Assets\Scripts\ParticleDataScriptable.cs" />
+    <Compile Include="Assets\Scripts\SliderControllerBehaviour.cs" />
     <None Include="Assets\Scenes\readme.txt" />
     <None Include="Assets\Audio\readme.txt" />
     <None Include="Assets\Resources\readme.txt" />
